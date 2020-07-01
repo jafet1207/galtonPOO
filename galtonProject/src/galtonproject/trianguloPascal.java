@@ -30,7 +30,7 @@ public class trianguloPascal {
         this.filas = filas;
     }
     
-    public boolean agregarArreglo(int[] fila) {
+    public boolean agregarFila(ArrayList<int[]> filas, int[] fila) {
         filas.add(fila);
         return true;
     }
@@ -45,25 +45,90 @@ public class trianguloPascal {
                 } else {
                     aux[j] = arreglo[j] + arreglo[j - 1];
                 }
-                //System.out.print(aux[j] + " ");
             }
             arreglo = aux;
-            //System.out.println();
-            
-            //System.out.println(arreglo instanceof int[]);
-            
-            //System.out.println(arreglo[0]);
-            agregarArreglo(arreglo);
+            agregarFila(filas, arreglo);
         }
     }
     
-    public void imprimirTriangulo(){
+    public void imprimirTriangulo(ArrayList<int[]> filas){
         for (int[] fila : filas) {
             for (int i : fila) {
                 System.out.print(i + " ");
             }
             System.out.println();
         }
+    }
+    
+    public ArrayList diagonal(int diag){
+        ArrayList<Integer> aux = new ArrayList<>();
+        for (int i = diag; i < filas.size(); i++) {
+            aux.add(filas.get(i)[diag]);
+        }
+        return aux;
+    }
+    
+     public ArrayList<int[]> diagonales(int diag){
+        ArrayList<int []> diags = new ArrayList();
+        int[] arreglo = new int[1];
+        for (int i = 1; i <= filas.size(); i++) { //Recorre todas las filas
+            int[] actual = filas.get(i-1);
+            
+            int[] aux = new int[i];
+            
+            if(actual.length < diag){ //Filas que tengan menos elementos que diag
+                for(int j = 0; j < actual.length; j++){ //Recorre el arreglo actual
+                    aux[j] = 0;
+                }
+            } else { //Filas que tengan más elementos que diag
+                for(int j = 0; j < actual.length; j++){ //Recorre el arreglo actual
+                    if(j == diag-1){
+                        aux[j] = 1;
+                    } else{
+                        aux[j] = 0;
+                    }
+                }
+            }
+            arreglo = aux;
+            agregarFila(diags, arreglo);
+        }
+        return diags ;
+    }
+    
+    public ArrayList<int[]> paresImpares (){
+        ArrayList<int []> pares = new ArrayList();
+        int[] arreglo = new int[1];
+        for (int i = 1; i <= filas.size(); i++) {
+            int[] aux = new int[i];
+            for (int j = 0; j < i; j++) {
+                if (j == 0 || j == (i - 1)) {
+                    aux[j] = 0;
+                } else {
+                    if ((arreglo[j] + arreglo[j - 1])%2==0){
+                        aux[j] = 1;
+                    }else{
+                        aux[j] = 0;
+                    }
+                }
+            }
+            arreglo = aux;
+            agregarFila(pares, arreglo);
+        }
+        return pares;
+    }
+    
+    public ArrayList<Integer> sumasHorizontales(){
+        ArrayList<Integer> arreglo = new ArrayList<>();
+        
+        for (int i = 1; i <= filas.size(); i++) {
+            int[] actual = filas.get(i-1);
+            int cant = 0;
+            for (int j = 0; j < i; j++){
+                cant+=actual[j];
+            }
+            arreglo.add(cant);
+        }
+        return arreglo;
     }
     
     @Override
