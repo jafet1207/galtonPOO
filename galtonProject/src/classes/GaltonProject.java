@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package galtonproject;
+package classes;
 
 /**
  *
@@ -19,10 +19,11 @@ public class GaltonProject {
         
         trianguloPascal pascal = new trianguloPascal();
         pascal.crearTriangulo(10);
+        System.out.println(pascal.diagonal(3));
         System.out.println("Imprimir");
-        pascal.imprimirTriangulo(pascal.getFilas()); //Imprime el triángulo normal
+        //pascal.imprimirTriangulo(pascal.getFilas()); //Imprime el triángulo normal
         //pascal.imprimirTriangulo(pascal.diagonales(5)); //Imprime el triángulo de la diagonal indicada
-        //pascal.imprimirTriangulo(pascal.paresImpares()); //Imprime el triángulo de pares e impares
+        pascal.imprimirTriangulo(pascal.paresImpares()); //Imprime el triángulo de pares e impares
         //System.out.println(pascal.sumasHorizontales()); //Imprime un ArrayList con los valores de las sumas horizontalmente
         
         
