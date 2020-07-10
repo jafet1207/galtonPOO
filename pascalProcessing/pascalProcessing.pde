@@ -10,9 +10,7 @@ void setup(){
     //pascal.graficarSierpinski(posX, posY, size); //Grafica el triangulo marcando el triángulo de sierpinski
     
     //pascal.imprimirTriangulo(pascal.diagonal(4)); //Imprime la diagonal en consola y la grafica
-    trianguloPascal pascal = new trianguloPascal();
-    pascal.crearTriangulo(10);
-    pascal.simetria();
+    
 }
 
 void draw(){
@@ -51,8 +49,10 @@ void draw(){
              background(0);
              pascal.sumasHorizontales();
            } else if(i == 2){
-             //Simetría
+             background(0);
+             pascal.simetria();
            } else if(i == 3){
+             background(0);
              //Fibonacci
            } else if(i == 4){
              background(0);

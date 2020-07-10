@@ -68,7 +68,7 @@ public class trianguloPascal {
                   fill(250,100,100); //Los cuadros salen rojos
                   aux[contAux] = i*-1;
                 }else{
-                  fill(225); //Los cuadros salen grises
+                  fill(150); //Los cuadros salen grises
                   aux[contAux] = i;
                 }
                 rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
@@ -98,7 +98,7 @@ public class trianguloPascal {
                   fill(250,100,100); //Los cuadros salen rojos
                   aux[contAux] = i;
                 }else{ //Impares
-                  fill(225); //Los cuadros salen grises
+                  fill(150); //Los cuadros salen grises
                   aux[contAux] = i*-1;
                 }
                 rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
@@ -123,7 +123,7 @@ public class trianguloPascal {
         ArrayList<Integer> arreglo = new ArrayList<Integer>();
         
         for (int i = 1; i <= filas.size(); i++) {
-            fill(225);
+            fill(150);
             line(auxX-45, auxY+size+(size/2), auxX+20, auxY+size+(size/2));
             rect(auxX+=size/2, auxY+=size, size, size);
             
@@ -152,7 +152,7 @@ public class trianguloPascal {
         int x = posX; int y = posY;
         for (int[] fila : filas) {
             for (int i : fila) {
-                fill(225); //Los cuadros salen grises
+                fill(150); //Los cuadros salen grises
                 rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
                 fill(0); //El texto sale negro
                 text(i, x+(size/2)-3, y+(size/2)+5);
@@ -163,41 +163,68 @@ public class trianguloPascal {
     }
     
     public ArrayList<ArrayList<Integer>> simetria(){
+        int x = posX; int y = posY;
         ArrayList<ArrayList<Integer>> lista = new ArrayList<ArrayList<Integer>>();
         ArrayList<Integer> izquierda = new ArrayList<Integer>();
         ArrayList<Integer> derecha = new ArrayList<Integer>();
         for (int[] fila : filas) {
             if(fila.length == 1){
                 izquierda.add(1); derecha.add(1);
+                fill(150);
+                rect (x+=size,y,size/2,size);//PosX, PosY, Ancho, Alto
+                fill(50);
+                rect (x+size/2,y,size/2,size);//PosX, PosY, Ancho, Alto
+                fill(0); //El texto sale negro
+                text(1, x+(size/2)-3, y+(size/2)+5);
             } else if(fila.length%2 == 0){ //Pares
                 for(int i = 0; i < fila.length/2; i++){ //Primera mitad
                     int actual = fila[i];
                     izquierda.add(actual);
+                    fill(150);
+                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                    fill(0); //El texto sale negro
+                    text(actual, x+(size/2)-3, y+(size/2)+5);
                 }
                 for(int i = fila.length/2; i < fila.length; i++){ //Segunda mitad
                     int actual = fila[i];
                     derecha.add(actual);
+                    fill(50);
+                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                    fill(0); //El texto sale negro
+                    text(actual, x+(size/2)-3, y+(size/2)+5);
                 }
             } else { //Impares
-                for(int i = 0; i < fila.length/2+1; i++){ //Primera mitad
+                for(int i = 0; i < fila.length/2; i++){ //Primera mitad
                     int actual = fila[i];
                     izquierda.add(actual);
+                    fill(150);
+                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                    fill(0); //El texto sale negro
+                    text(actual, x+(size/2)-3, y+(size/2)+5);
                 }
                 for(int i = fila.length/2; i < fila.length; i++){ //Segunda mitad
                     int actual = fila[i];
                     derecha.add(actual);
+                    if(i == fila.length/2){
+                        fill(150);
+                        rect (x+=size,y,size/2,size);//PosX, PosY, Ancho, Alto
+                        fill(50);
+                        rect (x+size/2,y,size/2,size);//PosX, PosY, Ancho, Alto
+                        fill(0); //El texto sale negro
+                        text(actual, x+(size/2)-3, y+(size/2)+5);
+                    } else {
+                        fill(50);
+                        rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                        fill(0); //El texto sale negro
+                        text(actual, x+(size/2)-3, y+(size/2)+5);
+                    }
                 }
             }
+            y+=size;
+            x = posX-=size/2;
         }
         lista.add(izquierda); lista.add(derecha);
-        /*System.out.print("Izq ");
-        for(int i : izquierda){
-             System.out.print(i + " ");
-        }
-        System.out.print("\nDer ");
-        for(int i : derecha){
-             System.out.print(i + " ");
-        }*/
+        restaurarPosiciones();
         return lista;
     }
     
