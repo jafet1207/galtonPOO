@@ -162,6 +162,56 @@ public class trianguloPascal {
         }
     }
     
+    public ArrayList<ArrayList<Integer>> simetria(){
+        ArrayList<ArrayList<Integer>> lista = new ArrayList<ArrayList<Integer>>();
+        ArrayList<Integer> izquierda = new ArrayList<Integer>();
+        ArrayList<Integer> derecha = new ArrayList<Integer>();
+        for (int[] fila : filas) {
+            if(fila.length == 1){
+                izquierda.add(1); derecha.add(1);
+            } else if(fila.length%2 == 0){ //Pares
+                for(int i = 0; i < fila.length/2; i++){ //Primera mitad
+                    int actual = fila[i];
+                    izquierda.add(actual);
+                }
+                for(int i = fila.length/2; i < fila.length; i++){ //Segunda mitad
+                    int actual = fila[i];
+                    derecha.add(actual);
+                }
+            } else { //Impares
+                for(int i = 0; i < fila.length/2+1; i++){ //Primera mitad
+                    int actual = fila[i];
+                    izquierda.add(actual);
+                }
+                for(int i = fila.length/2; i < fila.length; i++){ //Segunda mitad
+                    int actual = fila[i];
+                    derecha.add(actual);
+                }
+            }
+        }
+        lista.add(izquierda); lista.add(derecha);
+        /*System.out.print("Izq ");
+        for(int i : izquierda){
+             System.out.print(i + " ");
+        }
+        System.out.print("\nDer ");
+        for(int i : derecha){
+             System.out.print(i + " ");
+        }*/
+        return lista;
+    }
+    
+    public void imprimirSimetria(ArrayList<ArrayList<Integer>> lista){
+        System.out.print("Izq ");
+        for(int i : lista.get(0)){
+             System.out.print(i + " ");
+        }
+        System.out.print("\nDer ");
+        for(int i : lista.get(1)){
+             System.out.print(i + " ");
+        }
+    }
+    
     @Override
     public String toString() {
         return "trianguloPascal{" + "filas=" + filas + '}';
