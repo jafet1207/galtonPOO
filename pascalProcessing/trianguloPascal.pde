@@ -2,6 +2,7 @@ import java.util.ArrayList;
 
 public class trianguloPascal {
     private ArrayList<int[]> filas; //Arraylist de arrays de enteros
+    int posX = 325; int posY = 100; int size = 50;
 
     public trianguloPascal() {
         filas = new ArrayList<int[]>();
@@ -33,14 +34,10 @@ public class trianguloPascal {
             for (int j = 0; j < i; j++) {
                 if (j == 0 || j == (i - 1)) {
                     aux[j] = 1;
-                    //primerclavo = clavoX; //El primero clavo se pone en la posición clavoX
                 } else {
                     aux[j] = arreglo[j] + arreglo[j - 1];
-                    //clavoX+=50; //Se agrega 50 al eje X entre clavo y clavo
                 }
-                //System.out.print(aux[j]);
             }
-            //System.out.print("\n");
             arreglo = aux;
             agregarFila(filas, arreglo);
         }
@@ -55,39 +52,59 @@ public class trianguloPascal {
         }
     }
     
-    public ArrayList diagonal(int diag){
-        ArrayList<Integer> aux = new ArrayList<Integer>();
-        for (int i = diag; i < filas.size(); i++) {
-            aux.add(filas.get(i)[diag]);
-        }
-        return aux;
-    }
-    
-     public ArrayList<int[]> diagonales(int diag){
+    public ArrayList<int []> diagonal(int diag){
+        int x = posX; int y = posY;
         ArrayList<int []> diags = new ArrayList();
-        int[] arreglo = new int[1];
-        for (int i = 1; i <= filas.size(); i++) { //Recorre todas las filas
-            int[] actual = filas.get(i-1);
-            
-            int[] aux = new int[i];
-            
-            if(actual.length < diag){ //Filas que tengan menos elementos que diag
-                for(int j = 0; j < actual.length; j++){ //Recorre el arreglo actual
-                    aux[j] = 0;
+        int[] arreglo = new int[1]; int cont = 1;
+        for (int[] fila : filas) {
+            int[] aux = new int[cont];
+            int contAux=0;
+            for (int i : fila) {
+                if(contAux == diag-1){
+                  fill(250,100,100); //Los cuadros salen rojos
+                }else{
+                  fill(225); //Los cuadros salen grises
                 }
-            } else { //Filas que tengan más elementos que diag
-                for(int j = 0; j < actual.length; j++){ //Recorre el arreglo actual
-                    if(j == diag-1){
-                        aux[j] = 1;
-                    } else{
-                        aux[j] = 0;
-                    }
-                }
+                rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                fill(0); //El texto sale negro
+                text(i, x+(size/2)-3, y+(size/2)+5);
+                aux[contAux] = i;
+                contAux++;
             }
             arreglo = aux;
             agregarFila(diags, arreglo);
+            y+=size;
+            x = posX-=size/2;
+            cont++;
         }
-        return diags ;
+        return diags;
+    }
+    
+    public void graficarDiagonal(int diag){
+        int x = posX; int y = posY; diag--;
+        for (int[] fila : filas) { //Recorre todo el triángulo
+            if(fila.length < diag){ //Si la fila tiene menos elementos que el número de la diagonal
+                for (int i : fila) {
+                    fill(225); //Los cuadros salen grises
+                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                    fill(0); //El texto sale negro
+                    text(i, x+(size/2)-3, y+(size/2)+5);
+                }
+            } else {
+                for(int i = 0; i < fila.length; i++){ //Recorre toda la fila
+                    if(i == diag){
+                        fill(250,100,100); //Los cuadros salen rojos
+                    } else {
+                        fill(225); //Los cuadros salen grises
+                    }
+                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                    fill(0); //El texto sale negro
+                    text(i, x+(size/2)-3, y+(size/2)+5);
+                }
+            }
+            y+=size;
+            x = posX-=size/2;
+        }
     }
     
     public ArrayList<int[]> paresImpares (){
@@ -138,33 +155,6 @@ public class trianguloPascal {
                 fill(0); //El texto sale negro
                 text(i, x+(size/2)-3, y+(size/2)+5);
                 fill(255); //Los cuadros salen blancos
-            }
-            y+=size;
-            x = posX-=size/2;
-        }
-    }
-    
-    public void graficarDiagonal(int diag, int posX, int posY, int size){
-        int x = posX; int y = posY; diag--;
-        for (int[] fila : filas) { //Recorre todo el triángulo
-            if(fila.length < diag){ //Si la fila tiene menos elementos que el número de la diagonal
-                for (int i : fila) {
-                    fill(225); //Los cuadros salen blancos
-                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
-                    fill(0); //El texto sale negro
-                    text(i, x+(size/2)-3, y+(size/2)+5);
-                }
-            } else {
-                for(int i = 0; i < fila.length; i++){ //Recorre toda la fila
-                    if(i == diag){
-                        fill(250,100,100); //Los cuadros salen rojos
-                    } else {
-                        fill(225); //Los cuadros salen grises
-                    }
-                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
-                    fill(0); //El texto sale negro
-                    text(i, x+(size/2)-3, y+(size/2)+5);
-                }
             }
             y+=size;
             x = posX-=size/2;
