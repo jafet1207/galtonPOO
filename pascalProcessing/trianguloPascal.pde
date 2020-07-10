@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class trianguloPascal {
     private ArrayList<int[]> filas; //Arraylist de arrays de enteros
-    int posX = 325; int posY = 100; int size = 50;
+    int posX = 325; int posY = 200; int size = 50;
 
     public trianguloPascal() {
         filas = new ArrayList<int[]>();
@@ -23,6 +23,10 @@ public class trianguloPascal {
     public boolean agregarFila(ArrayList<int[]> filas, int[] fila) {
         filas.add(fila);
         return true;
+    }
+    
+    public void restaurarPosiciones(){
+        posX = 325; posY = 100; size = 50;
     }
     
     public void crearTriangulo(int nfilas) {
@@ -52,7 +56,7 @@ public class trianguloPascal {
         }
     }
     
-    public ArrayList<int []> diagonal(int diag){
+    public ArrayList<int []> diagonal(int diag){ //Lógica y grafico juntos
         int x = posX; int y = posY;
         ArrayList<int []> diags = new ArrayList();
         int[] arreglo = new int[1]; int cont = 1;
@@ -62,13 +66,14 @@ public class trianguloPascal {
             for (int i : fila) {
                 if(contAux == diag-1){
                   fill(250,100,100); //Los cuadros salen rojos
+                  aux[contAux] = i*-1;
                 }else{
                   fill(225); //Los cuadros salen grises
+                  aux[contAux] = i;
                 }
                 rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
                 fill(0); //El texto sale negro
                 text(i, x+(size/2)-3, y+(size/2)+5);
-                aux[contAux] = i;
                 contAux++;
             }
             arreglo = aux;
@@ -77,103 +82,80 @@ public class trianguloPascal {
             x = posX-=size/2;
             cont++;
         }
+        restaurarPosiciones();
         return diags;
     }
     
-    public void graficarDiagonal(int diag){
-        int x = posX; int y = posY; diag--;
-        for (int[] fila : filas) { //Recorre todo el triángulo
-            if(fila.length < diag){ //Si la fila tiene menos elementos que el número de la diagonal
-                for (int i : fila) {
-                    fill(225); //Los cuadros salen grises
-                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
-                    fill(0); //El texto sale negro
-                    text(i, x+(size/2)-3, y+(size/2)+5);
+    public ArrayList<int []> sierpinski(){ //Lógica y grafico juntos
+        int x = posX; int y = posY;
+        ArrayList<int []> sierp = new ArrayList();
+        int[] arreglo = new int[1]; int cont = 1;
+        for (int[] fila : filas) {
+            int[] aux = new int[cont];
+            int contAux=0;
+            for (int i : fila) {
+                if(i%2 == 0){ //Pares
+                  fill(250,100,100); //Los cuadros salen rojos
+                  aux[contAux] = i;
+                }else{ //Impares
+                  fill(225); //Los cuadros salen grises
+                  aux[contAux] = i*-1;
                 }
-            } else {
-                for(int i = 0; i < fila.length; i++){ //Recorre toda la fila
-                    if(i == diag){
-                        fill(250,100,100); //Los cuadros salen rojos
-                    } else {
-                        fill(225); //Los cuadros salen grises
-                    }
-                    rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
-                    fill(0); //El texto sale negro
-                    text(i, x+(size/2)-3, y+(size/2)+5);
-                }
-            }
-            y+=size;
-            x = posX-=size/2;
-        }
-    }
-    
-    public ArrayList<int[]> paresImpares (){
-        ArrayList<int []> pares = new ArrayList();
-        int[] arreglo = new int[1];
-        
-        for (int i = 1; i <= filas.size(); i++) {
-            int[] aux = new int[i];
-            for (int j = 0; j < i; j++) {
-                if (j == 0 || j == (i - 1)) {
-                    aux[j] = 0;
-                } else {
-                    if ((arreglo[j] + arreglo[j - 1])%2==0){
-                        //int a = arreglo[j];
-                        System.out.print(arreglo[j]+arreglo[j-1]);
-                        aux[j] = 101;
-                    }else{
-                        aux[j] = 0;
-                    }
-                }
+                rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                fill(0); //El texto sale negro
+                text(i, x+(size/2)-3, y+(size/2)+5);
+                contAux++;
             }
             arreglo = aux;
-            agregarFila(pares, arreglo);
+            agregarFila(sierp, arreglo);
+            y+=size;
+            x = posX-=size/2;
+            cont++;
         }
-        return pares;
+        restaurarPosiciones();
+        return sierp;
     }
     
-    public ArrayList<Integer> sumasHorizontales(){
+    public ArrayList<Integer> sumasHorizontales(){ //Lógica y grafico juntos
+        int auxX = posX+(size*3); int auxY = posY-size;
+        graficarTriangulo();
+      
         ArrayList<Integer> arreglo = new ArrayList<Integer>();
         
         for (int i = 1; i <= filas.size(); i++) {
+            fill(225);
+            line(auxX-45, auxY+size+(size/2), auxX+20, auxY+size+(size/2));
+            rect(auxX+=size/2, auxY+=size, size, size);
+            
+          
             int[] actual = filas.get(i-1);
             int cant = 0;
             for (int j = 0; j < i; j++){
                 cant+=actual[j];
             }
             arreglo.add(cant);
+            fill(0); //El texto sale negro
+            if(cant < 9){
+              text(cant, auxX+(size/2)-3, auxY+(size/2)+5);
+            } else if (cant < 99){
+              text(cant, auxX+(size/2)-6, auxY+(size/2)+5);
+            } else {
+              text(cant, auxX+(size/2)-9, auxY+(size/2)+5);
+            }
         }
+        restaurarPosiciones();
         return arreglo;
     }
     
         
-    public void graficarTriangulo(int posX, int posY, int size){
+    public void graficarTriangulo(){
         int x = posX; int y = posY;
         for (int[] fila : filas) {
             for (int i : fila) {
+                fill(225); //Los cuadros salen grises
                 rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
                 fill(0); //El texto sale negro
                 text(i, x+(size/2)-3, y+(size/2)+5);
-                fill(255); //Los cuadros salen blancos
-            }
-            y+=size;
-            x = posX-=size/2;
-        }
-    }
-    
-    public void graficarSierpinski(int posX, int posY, int size){
-        int x = posX; int y = posY;
-        for (int[] fila : filas) {
-            for (int i : fila) {
-                if(i%2 == 0){ //Si son pares
-                    fill(225); //Los cuadros salen grises
-                } else { //Si son impares
-                    fill(250,100,100); //Los cuadros salen rojos
-                }
-                rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
-                fill(0); //El texto sale negro
-                text(i, x+(size/2)-3, y+(size/2)+5);
-                
             }
             y+=size;
             x = posX-=size/2;
