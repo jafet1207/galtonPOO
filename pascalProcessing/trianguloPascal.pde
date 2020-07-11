@@ -65,7 +65,7 @@ public class trianguloPascal {
             int contAux=0;
             for (int i : fila) {
                 if(contAux == diag-1){
-                  fill(250,100,100); //Los cuadros salen rojos
+                  fill(50);
                   aux[contAux] = i*-1;
                 }else{
                   fill(150); //Los cuadros salen grises
@@ -95,7 +95,7 @@ public class trianguloPascal {
             int contAux=0;
             for (int i : fila) {
                 if(i%2 == 0){ //Pares
-                  fill(250,100,100); //Los cuadros salen rojos
+                  fill(50);
                   aux[contAux] = i;
                 }else{ //Impares
                   fill(150); //Los cuadros salen grises
@@ -123,7 +123,7 @@ public class trianguloPascal {
         ArrayList<Integer> arreglo = new ArrayList<Integer>();
         
         for (int i = 1; i <= filas.size(); i++) {
-            fill(150);
+            fill(50);
             line(auxX-45, auxY+size+(size/2), auxX+20, auxY+size+(size/2));
             rect(auxX+=size/2, auxY+=size, size, size);
             
