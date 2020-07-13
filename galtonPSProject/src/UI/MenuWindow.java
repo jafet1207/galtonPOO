@@ -5,6 +5,7 @@
  */
 package UI;
 
+import classesPS.Pascal;
 import javax.swing.JOptionPane;
 import processing.core.PApplet;
 
@@ -51,6 +52,11 @@ public class MenuWindow extends javax.swing.JFrame {
         btnPascal.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnPascal.setForeground(new java.awt.Color(255, 255, 255));
         btnPascal.setText("Pascal");
+        btnPascal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPascalActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnPascal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(0, 0, 0));
@@ -157,6 +163,10 @@ public class MenuWindow extends javax.swing.JFrame {
         // TODO add your handling code here:
         PApplet.main(new String[]{classesPS.galton.class.getName()});
     }//GEN-LAST:event_btnGaltonActionPerformed
+
+    private void btnPascalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPascalActionPerformed
+        
+    }//GEN-LAST:event_btnPascalActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDiagonales;
