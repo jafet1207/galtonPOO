@@ -33,18 +33,11 @@ public class trianguloPascal {
         PApplet.main(classesPS.trianguloPascal.processingWindow.class.getName());
     }
 
-    /*public void correr(int valor) {
-        if (valor == 1) {
-            PApplet pa = new processingWindow();
-            PApplet.main(classesPS.trianguloPascal.processingWindow.class.getName());
-        }
-
-    }*/
     public static class processingWindow extends PApplet {
 
         public void settings() {
             //generated size: replace this settings with yours
-            size(800, 800);
+            size(650, 600);
         }
 
         public void setup() {
@@ -80,9 +73,10 @@ public class trianguloPascal {
 
         PApplet sketch;
         private ArrayList<int[]> filas; //Arraylist de arrays de enteros
-        int posX = 325;
-        int posY = 200;
+        int posX = 250; //325
+        int posY = 50; //200
         int size = 50;
+        float[] colorAux = {0, 170, 228};
 
         public pascal(PApplet sketch) {
             filas = new ArrayList<int[]>();
@@ -151,7 +145,7 @@ public class trianguloPascal {
                 int contAux = 0;
                 for (int i : fila) {
                     if (contAux == diag - 1) {
-                        sketch.fill(50);
+                        sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                         aux[contAux] = i * -1;
                     } else {
                         sketch.fill(150); //Los cuadros salen grises
@@ -183,7 +177,7 @@ public class trianguloPascal {
                 int contAux = 0;
                 for (int i : fila) {
                     if (i % 2 == 0) { //Pares
-                        sketch.fill(50);
+                        sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                         aux[contAux] = i;
                     } else { //Impares
                         sketch.fill(150); //Los cuadros salen grises
@@ -205,6 +199,7 @@ public class trianguloPascal {
         }
 
         public ArrayList<Integer> sumasHorizontales() { //Lógica y grafico juntos
+            posX-=62;
             int auxX = posX + (size * 3);
             int auxY = posY - size;
             graficarTriangulo();
@@ -212,7 +207,7 @@ public class trianguloPascal {
             ArrayList<Integer> arreglo = new ArrayList<Integer>();
 
             for (int i = 1; i <= filas.size(); i++) {
-                sketch.fill(50);
+                sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                 sketch.line(auxX - 45, auxY + size + (size / 2), auxX + 20, auxY + size + (size / 2));
                 sketch.rect(auxX += size / 2, auxY += size, size, size);
 
@@ -262,7 +257,7 @@ public class trianguloPascal {
                     derecha.add(1);
                     sketch.fill(150);
                     sketch.rect(x += size, y, size / 2, size);//PosX, PosY, Ancho, Alto
-                    sketch.fill(50);
+                    sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                     sketch.rect(x + size / 2, y, size / 2, size);//PosX, PosY, Ancho, Alto
                     sketch.fill(0); //El texto sale negro
                     sketch.text(1, x + (size / 2) - 3, y + (size / 2) + 5);
@@ -278,7 +273,7 @@ public class trianguloPascal {
                     for (int i = fila.length / 2; i < fila.length; i++) { //Segunda mitad
                         int actual = fila[i];
                         derecha.add(actual);
-                        sketch.fill(50);
+                        sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                         sketch.rect(x += size, y, size, size);//PosX, PosY, Ancho, Alto
                         sketch.fill(0); //El texto sale negro
                         sketch.text(actual, x + (size / 2) - 3, y + (size / 2) + 5);
@@ -298,12 +293,12 @@ public class trianguloPascal {
                         if (i == fila.length / 2) {
                             sketch.fill(150);
                             sketch.rect(x += size, y, size / 2, size);//PosX, PosY, Ancho, Alto
-                            sketch.fill(50);
+                            sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                             sketch.rect(x + size / 2, y, size / 2, size);//PosX, PosY, Ancho, Alto
                             sketch.fill(0); //El texto sale negro
                             sketch.text(actual, x + (size / 2) - 3, y + (size / 2) + 5);
                         } else {
-                            sketch.fill(50);
+                            sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                             sketch.rect(x += size, y, size, size);//PosX, PosY, Ancho, Alto
                             sketch.fill(0); //El texto sale negro
                             sketch.text(actual, x + (size / 2) - 3, y + (size / 2) + 5);

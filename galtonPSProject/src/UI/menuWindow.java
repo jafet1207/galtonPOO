@@ -5,6 +5,7 @@
  */
 package UI;
 
+import classesPS.galton;
 import classesPS.pascal;
 import classesPS.trianguloPascal;
 import javax.swing.JOptionPane;
@@ -42,7 +43,6 @@ public class menuWindow extends javax.swing.JFrame {
         btnSimetría = new javax.swing.JButton();
         btnFibonacci = new javax.swing.JButton();
         btnGalton = new javax.swing.JButton();
-        jPanelPantalla = new javax.swing.JPanel();
         cboDiags = new javax.swing.JComboBox<>();
         cboSize = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
@@ -83,7 +83,7 @@ public class menuWindow extends javax.swing.JFrame {
                 btnInfoActionPerformed(evt);
             }
         });
-        getContentPane().add(btnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 70, 100, 40));
+        getContentPane().add(btnInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 70, 100, 40));
 
         btnDiagonales.setBackground(new java.awt.Color(0, 0, 0));
         btnDiagonales.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -146,23 +146,6 @@ public class menuWindow extends javax.swing.JFrame {
         });
         getContentPane().add(btnGalton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
-        jPanelPantalla.setBackground(new java.awt.Color(0, 0, 0));
-        jPanelPantalla.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanelPantalla.setForeground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jPanelPantallaLayout = new javax.swing.GroupLayout(jPanelPantalla);
-        jPanelPantalla.setLayout(jPanelPantallaLayout);
-        jPanelPantallaLayout.setHorizontalGroup(
-            jPanelPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 586, Short.MAX_VALUE)
-        );
-        jPanelPantallaLayout.setVerticalGroup(
-            jPanelPantallaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 556, Short.MAX_VALUE)
-        );
-
-        getContentPane().add(jPanelPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 590, 560));
-
         cboDiags.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         cboDiags.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         getContentPane().add(cboDiags, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 50, 40));
@@ -183,6 +166,7 @@ public class menuWindow extends javax.swing.JFrame {
 
     private void btnInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInfoActionPerformed
         JOptionPane.showMessageDialog(null, "En esta ventana se muestran los botones necesarios para el funcionamiento del programa:\n"
+                + "Pascal\n"
                 + "Diagonales\n"
                 + "Pares e impares\n"
                 + "Suma horizontal\n"
@@ -197,13 +181,11 @@ public class menuWindow extends javax.swing.JFrame {
 
     private void btnGaltonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaltonActionPerformed
         // TODO add your handling code here:
-        PApplet.main(new String[]{classesPS.galton.class.getName()});
+        galton gtn = new galton(Integer.parseInt(cboSize.getSelectedItem().toString()));
     }//GEN-LAST:event_btnGaltonActionPerformed
 
     private void btnPascalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPascalActionPerformed
-        //trianguloPascal tp = new trianguloPascal();
-        //tp.correr(1); // 1 == Pascal
-        trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
+         trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
     }//GEN-LAST:event_btnPascalActionPerformed
 
     private void btnDiagonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagonalesActionPerformed
@@ -245,6 +227,5 @@ public class menuWindow extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cboSize;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFondo;
-    private javax.swing.JPanel jPanelPantalla;
     // End of variables declaration//GEN-END:variables
 }
