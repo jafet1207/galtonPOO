@@ -5,7 +5,7 @@
  */
 package UI;
 
-import classesPS.Pascal;
+import classesPS.pascal;
 import javax.swing.JOptionPane;
 import processing.core.PApplet;
 

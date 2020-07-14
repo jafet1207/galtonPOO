@@ -239,6 +239,20 @@ public class trianguloPascal {
         }
     }
     
+    public void fibonacci(){
+        int x = posX; int y = posY;
+        for (int[] fila : filas) {
+            for (int i : fila) {
+                fill(150); //Los cuadros salen grises
+                rect (x+=size,y,size,size);//PosX, PosY, Ancho, Alto
+                fill(0); //El texto sale negro
+                text(i, x+(size/2)-3, y+(size/2)+5);
+            }
+            y+=size;
+            x = posX-=size/2;
+        }
+    }
+    
     @Override
     public String toString() {
         return "trianguloPascal{" + "filas=" + filas + '}';

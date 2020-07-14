@@ -35,12 +35,20 @@ void draw(){
     posX = 15; posY = 15; //Para los botones
     X = 26; Y = 40; //Para los textos
     String[] titulos = {" Sierpinski"," Sumas H","  Simetría"," Fibonacci","   Pascal"};
-    for(int i = 0; i < 5; i++){ //Botones de otros
+    
+    pascal.sierpinski();
+    pascal.sumasHorizontales();
+    pascal.simetria();
+    pascal.fibonacci();
+    pascal.graficarTriangulo();
+    
+    /*for(int i = 0; i < 5; i++){ //Botones de otros
       fill(225);
       stroke(255);
       rect(posX+=size*2+10, posY, size*2, size);
       fill(0);
       text(titulos[i], X+=(size*2)+10, Y);
+      
       if(mouseX > posX && mouseX < posX+(size*2) && mouseY > posY && mouseY < posY+size && mousePressed==true) {
            if(i == 0){
              background(0);
@@ -53,12 +61,12 @@ void draw(){
              pascal.simetria();
            } else if(i == 3){
              background(0);
-             //Fibonacci
+             pascal.fibonacci();
            } else if(i == 4){
              background(0);
              pascal.graficarTriangulo();
            }
-      }
+      }*/
     }
      
 }

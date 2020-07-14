@@ -9,18 +9,18 @@ import processing.core.*;
 
 import java.util.ArrayList;
 
-public class Pascal {
+public class pascal {
     
     PApplet sketch;
     private ArrayList<int[]> filas; //Arraylist de arrays de enteros
     int posX = 325; int posY = 200; int size = 50;
 
-    public Pascal(PApplet sketch) {
+    public pascal(PApplet sketch) {
         filas = new ArrayList<int[]>();
         this.sketch = sketch;
     }
     
-    public Pascal(ArrayList<int[]> filas, PApplet sketch) {
+    public pascal(ArrayList<int[]> filas, PApplet sketch) {
         this.filas = filas;
         this.sketch = sketch;
     }
@@ -159,7 +159,6 @@ public class Pascal {
         restaurarPosiciones();
         return arreglo;
     }
-    
         
     public void graficarTriangulo(){
         int x = posX; int y = posY;

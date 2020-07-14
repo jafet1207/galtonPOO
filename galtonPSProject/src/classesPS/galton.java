@@ -14,12 +14,14 @@ import org.jbox2d.dynamics.contacts.*;
  */
 public class galton extends PApplet {
 
-    ArrayList<Clavo> clavos;
-    ArrayList<Contenedor> plataformas;
-    Bola[] bolas = new Bola[100]; //Aquí se cambia la cantidad de bolas
+    ArrayList<clavo> clavos;
+    ArrayList<contenedor> plataformas;
+    //bola[] bolas = new bola[100]; //Aquí se cambia la cantidad de bolas
+    figura[] bolas = new bola[150];
     int altura, contador = 1, i, j;
     float clavoX, clavoY, primerclavo;
     Box2DProcessing box2d;
+    float[] color = {0, 0, 0};
 
     public void settings() {
         size(800, 800);
@@ -30,25 +32,25 @@ public class galton extends PApplet {
         box2d = new Box2DProcessing(this);
         box2d.createWorld();
         box2d.listenForCollisions();
-
-        plataformas = new ArrayList<Contenedor>();
+        plataformas = new ArrayList<contenedor>();
         //bolas = new ArrayList<Bola>();
         for (int i = 0; i < bolas.length; i++) { //bolas.length
-            bolas[i] = new Bola(random(120, 500), random(-50, 10), this, box2d);
+            //bolas[i] = new bola(random(120, 500), random(-50, 10), this, box2d);
+            bolas[i] = new bola(random(120, 500), random(-50, 10), 6.4f, color, this, box2d);
         }
-        clavos = new ArrayList<Clavo>();
+        clavos = new ArrayList<clavo>();
         //mecanismo de idb
-        plataformas.add(new Contenedor(175f, 110f, 800f, 5f, radians(-5), this, box2d));//barra superio iz
-        plataformas.add(new Contenedor(625, 180, 810, 5, radians(5), this, box2d));//superio derecha
-        plataformas.add(new Contenedor(175, 255, 435, 5, radians(-5), this, box2d));//barra superio iz 2
-        plataformas.add(new Contenedor(559, 260, 300, 5, radians(5), this, box2d));//superio derecha 2
-        plataformas.add(new Contenedor(800, 115, 100, 5, radians(90), this, box2d));//barrera de choque drecha
-        plataformas.add(new Contenedor(0, 137, 200, 5, radians(90), this, box2d));//barrera de choque iz
-        plataformas.add(new Contenedor(760, 205, 130, 5, radians(40), this, box2d));//barrera de choque iz
+        //plataformas.add(new contenedor(175, 110, 800, 5, radians(-5), this, box2d));//barra superio iz
+        //plataformas.add(new contenedor(625, 180, 810, 5, radians(5), this, box2d));//superio derecha
+        plataformas.add(new contenedor(175, 255, 435, 5, radians(-5), this, box2d));//barra superio iz 2
+        plataformas.add(new contenedor(559, 260, 300, 5, radians(5), this, box2d));//superio derecha 2
+        plataformas.add(new contenedor(800, 115, 100, 5, radians(90), this, box2d));//barrera de choque drecha
+        plataformas.add(new contenedor(0, 137, 200, 5, radians(90), this, box2d));//barrera de choque iz
+        plataformas.add(new contenedor(760, 205, 130, 5, radians(40), this, box2d));//barrera de choque iz
 
         //bumper
-        plataformas.add(new Contenedor(537.5f, 430, 400, 5, radians(-49.8f), this, box2d));
-        plataformas.add(new Contenedor(262.5f, 430, 400, 5, radians(49.8f), this, box2d));
+        plataformas.add(new contenedor(537.5f, 430, 400, 5, radians(-49.8f), this, box2d));
+        plataformas.add(new contenedor(262.5f, 430, 400, 5, radians(49.8f), this, box2d));
 
         clavoX = 400;
         clavoY = 310;
@@ -64,8 +66,9 @@ public class galton extends PApplet {
                     clavoX = clavoX + 50;
 
                 }
-                System.out.print("A " + contador);
-                clavos.add(new Clavo(clavoX, clavoY, this, box2d));
+                System.out.print(contador);
+                //clavos.add(new clavo(clavoX, clavoY, this, box2d));
+                clavos.add(new clavo(clavoX, clavoY, 3, color, this, box2d));
 
             }
             System.out.print("\n");
@@ -76,12 +79,18 @@ public class galton extends PApplet {
         // genera la base para que se depositen las bolitas 
         clavoY = clavoY - 30;
         primerclavo = primerclavo - 50;
-        plataformas.add(new Contenedor(400, clavoY + 220, 600, 5, radians(180), this, box2d));
+        plataformas.add(new contenedor(400, clavoY + 220, 600, 5, radians(180), this, box2d));
         for (i = 0; i < altura + 2; i++) {
-            plataformas.add(new Contenedor(primerclavo, clavoY + 110, 210, 5, radians(90), this, box2d));
+            plataformas.add(new contenedor(primerclavo, clavoY + 110, 210, 5, radians(90), this, box2d));
             primerclavo = primerclavo + 50;
         }
 
+    }
+    
+    
+    public void exit(){
+   
+        super.stop();
     }
 
     @Override
@@ -90,28 +99,17 @@ public class galton extends PApplet {
 
         box2d.step();
 
-        for (Contenedor wall : plataformas) {
+        for (contenedor wall : plataformas) {
             wall.display();
         }
 
-        //Clavo co = new Clavo(width/2,290);
-        //clavos.add(co);
-        for (Clavo c : clavos) {
+        for (clavo c : clavos) {
             c.display();
 
         }
 
-        for (Bola b : bolas) {
+        for (figura b : bolas) {
             b.display();
-        }
-
-        fill(225);
-        stroke(255);
-        rect(750, 30, 80, 30);
-        fill(0);
-        text("Regresar", 725, 35);
-        if (mouseX > 710 && mouseX < 790 && mouseY > 15 && mouseY < 45 && mousePressed == true) { //Al presionar el botón
-           
         }
 
     }
@@ -132,8 +130,9 @@ public class galton extends PApplet {
             return;
         }
 
-        if (o1.getClass() == Bola.class && o2.getClass() == Clavo.class) {
-            Bola p1 = (Bola) o1;
+        if (o1.getClass() == bola.class && o2.getClass() == clavo.class) {
+            System.out.println("Entro");
+            bola p1 = (bola) o1;
             p1.cambioColor();
         }
 
@@ -143,5 +142,3 @@ public class galton extends PApplet {
 
     }
 }
-
-//cambiocolor random 255 + 100

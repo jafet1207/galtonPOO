@@ -16,7 +16,7 @@ import processing.core.*;
  *
  * @author 
  */
-public class Contenedor {
+public class contenedor {
     
     PApplet sketch;
     Box2DProcessing box2d;
@@ -28,7 +28,7 @@ public class Contenedor {
     // But we also have to make a body for box2d to know about it
     Body b;
 
-    Contenedor(float x_, float y_, float w_, float h_, float a, PApplet sketch, Box2DProcessing box2d) {
+    contenedor(float x_, float y_, float w_, float h_, float a, PApplet sketch, Box2DProcessing box2d) {
         this.sketch = sketch;
         this.box2d = box2d;
         x = x_;
