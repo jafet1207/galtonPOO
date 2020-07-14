@@ -1,5 +1,5 @@
 
-import UI.MainWindow;
+import UI.mainWindow;
 import processing.core.*;
 
 public class main extends PApplet {
@@ -8,7 +8,7 @@ public class main extends PApplet {
         //PApplet.main("galtonPSProject");
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MainWindow().setVisible(true); //HACE VISIBLE EL FORM PRINCIPAL
+                new mainWindow().setVisible(true); //HACE VISIBLE EL FORM PRINCIPAL
             }
         });
     }

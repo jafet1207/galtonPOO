@@ -6,6 +6,7 @@
 package UI;
 
 import classesPS.pascal;
+import classesPS.trianguloPascal;
 import javax.swing.JOptionPane;
 import processing.core.PApplet;
 
@@ -13,12 +14,12 @@ import processing.core.PApplet;
  *
  * @author 
  */
-public class MenuWindow extends javax.swing.JFrame {
+public class menuWindow extends javax.swing.JFrame {
 
     /**
      * Creates new form MenuWindow
      */
-    public MenuWindow() {
+    public menuWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -42,6 +43,9 @@ public class MenuWindow extends javax.swing.JFrame {
         btnFibonacci = new javax.swing.JButton();
         btnGalton = new javax.swing.JButton();
         jPanelPantalla = new javax.swing.JPanel();
+        cboDiags = new javax.swing.JComboBox<>();
+        cboSize = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jLabelFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -57,7 +61,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnPascalActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPascal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        getContentPane().add(btnPascal, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
 
         btnSalir.setBackground(new java.awt.Color(0, 0, 0));
         btnSalir.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -85,31 +89,51 @@ public class MenuWindow extends javax.swing.JFrame {
         btnDiagonales.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnDiagonales.setForeground(new java.awt.Color(255, 255, 255));
         btnDiagonales.setText("Diagonales");
-        getContentPane().add(btnDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, -1, -1));
+        btnDiagonales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDiagonalesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnDiagonales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
 
         btnSumasHorizontales.setBackground(new java.awt.Color(0, 0, 0));
         btnSumasHorizontales.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSumasHorizontales.setForeground(new java.awt.Color(255, 255, 255));
         btnSumasHorizontales.setText("Suma Horizontal");
-        getContentPane().add(btnSumasHorizontales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
+        btnSumasHorizontales.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSumasHorizontalesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSumasHorizontales, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
 
         btnSierpinski.setBackground(new java.awt.Color(0, 0, 0));
         btnSierpinski.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSierpinski.setForeground(new java.awt.Color(255, 255, 255));
         btnSierpinski.setText("Pares e Impares");
-        getContentPane().add(btnSierpinski, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, -1, -1));
+        btnSierpinski.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSierpinskiActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSierpinski, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 190, -1, -1));
 
         btnSimetría.setBackground(new java.awt.Color(0, 0, 0));
         btnSimetría.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnSimetría.setForeground(new java.awt.Color(255, 255, 255));
         btnSimetría.setText("Simetría");
-        getContentPane().add(btnSimetría, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 240, -1, -1));
+        btnSimetría.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSimetríaActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSimetría, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         btnFibonacci.setBackground(new java.awt.Color(0, 0, 0));
         btnFibonacci.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnFibonacci.setForeground(new java.awt.Color(255, 255, 255));
         btnFibonacci.setText("Fibonacci");
-        getContentPane().add(btnFibonacci, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
+        getContentPane().add(btnFibonacci, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         btnGalton.setBackground(new java.awt.Color(0, 0, 0));
         btnGalton.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -120,7 +144,7 @@ public class MenuWindow extends javax.swing.JFrame {
                 btnGaltonActionPerformed(evt);
             }
         });
-        getContentPane().add(btnGalton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 350, -1, -1));
+        getContentPane().add(btnGalton, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
         jPanelPantalla.setBackground(new java.awt.Color(0, 0, 0));
         jPanelPantalla.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -138,6 +162,18 @@ public class MenuWindow extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanelPantalla, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, 590, 560));
+
+        cboDiags.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cboDiags.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        getContentPane().add(cboDiags, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 140, 50, 40));
+
+        cboSize.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        cboSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
+        getContentPane().add(cboSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 50, 30));
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel1.setText("ALTURA");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
         jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.jpg"))); // NOI18N
         getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1019, 675));
@@ -165,8 +201,35 @@ public class MenuWindow extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGaltonActionPerformed
 
     private void btnPascalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPascalActionPerformed
-        
+        //trianguloPascal tp = new trianguloPascal();
+        //tp.correr(1); // 1 == Pascal
+        trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
     }//GEN-LAST:event_btnPascalActionPerformed
+
+    private void btnDiagonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagonalesActionPerformed
+        int altura = Integer.parseInt(cboSize.getSelectedItem().toString());
+        int diagonal = Integer.parseInt(cboDiags.getSelectedItem().toString());
+        if(altura < diagonal){
+            JOptionPane.showMessageDialog(null, "La altura debe ser mayor o igual a la diagonal");
+        } else {
+            trianguloPascal tp = new trianguloPascal(2, altura, diagonal); // 2 == Diagonales
+        }
+    }//GEN-LAST:event_btnDiagonalesActionPerformed
+
+    private void btnSierpinskiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSierpinskiActionPerformed
+        // TODO add your handling code here:
+        trianguloPascal tp = new trianguloPascal(3, Integer.parseInt(cboSize.getSelectedItem().toString())); // 3 == Sierpinski
+    }//GEN-LAST:event_btnSierpinskiActionPerformed
+
+    private void btnSumasHorizontalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumasHorizontalesActionPerformed
+        // TODO add your handling code here:
+        trianguloPascal tp = new trianguloPascal(4, Integer.parseInt(cboSize.getSelectedItem().toString())); // 4 == Sumas
+    }//GEN-LAST:event_btnSumasHorizontalesActionPerformed
+
+    private void btnSimetríaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimetríaActionPerformed
+        // TODO add your handling code here:
+        trianguloPascal tp = new trianguloPascal(5, Integer.parseInt(cboSize.getSelectedItem().toString())); // 5 == Simetría
+    }//GEN-LAST:event_btnSimetríaActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDiagonales;
@@ -178,6 +241,9 @@ public class MenuWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnSierpinski;
     private javax.swing.JButton btnSimetría;
     private javax.swing.JButton btnSumasHorizontales;
+    private javax.swing.JComboBox<String> cboDiags;
+    private javax.swing.JComboBox<String> cboSize;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelFondo;
     private javax.swing.JPanel jPanelPantalla;
     // End of variables declaration//GEN-END:variables

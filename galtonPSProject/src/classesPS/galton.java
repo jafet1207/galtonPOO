@@ -1,6 +1,6 @@
 package classesPS;
 
-import UI.MenuWindow;
+import UI.menuWindow;
 import processing.core.*;
 import java.util.ArrayList;
 import shiffman.box2d.*;
@@ -89,7 +89,6 @@ public class galton extends PApplet {
     
     
     public void exit(){
-   
         super.stop();
     }
 
