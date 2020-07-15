@@ -100,7 +100,7 @@ public class galton extends PApplet {
 
         @Override
         public void draw() {
-            background(255);
+            background(230);
 
             box2d.step();
 
@@ -134,7 +134,7 @@ public class galton extends PApplet {
             }
 
             if (o1.getClass() == bola.class && o2.getClass() == clavo.class) {
-                System.out.println("Entro");
+                //System.out.println("Entro");
                 bola p1 = (bola) o1;
                 p1.cambioColor();
             }

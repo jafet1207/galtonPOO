@@ -24,7 +24,7 @@ public class trianguloPascal {
         PApplet pa = new processingWindow();
         PApplet.main(classesPS.trianguloPascal.processingWindow.class.getName());
     }
-    
+
     public trianguloPascal(int val, int tamano, int diag) {
         valor = val;
         size = tamano;
@@ -41,7 +41,7 @@ public class trianguloPascal {
         }
 
         public void setup() {
-            background(255);
+            background(230);
 
         }
 
@@ -56,16 +56,17 @@ public class trianguloPascal {
 
             if (valor == 1) {
                 p.graficarTriangulo();
-            } else if(valor == 2) {
+            } else if (valor == 2) {
                 p.diagonal(diagonal);
-            } else if(valor == 3) {
+            } else if (valor == 3) {
                 p.sierpinski();
-            } else if(valor == 4) {
+            } else if (valor == 4) {
                 p.sumasHorizontales();
-            } else if(valor == 5) {
+            } else if (valor == 5) {
                 p.simetria();
+            } else if (valor == 6) {
+                p.fibonacci();
             }
-            //p.sierpinski();
         }
     }
 
@@ -77,6 +78,7 @@ public class trianguloPascal {
         int posY = 50; //200
         int size = 50;
         float[] colorAux = {0, 170, 228};
+        ArrayList<int[]> colores = new ArrayList<int[]>();
 
         public pascal(PApplet sketch) {
             filas = new ArrayList<int[]>();
@@ -102,8 +104,8 @@ public class trianguloPascal {
         }
 
         public void restaurarPosiciones() {
-            posX = 325;
-            posY = 100;
+            posX = 250; //325
+            posY = 50; //200
             size = 50;
         }
 
@@ -134,6 +136,11 @@ public class trianguloPascal {
             }
         }
 
+        /**
+         *
+         * @param diag
+         * @return
+         */
         public ArrayList<int[]> diagonal(int diag) { //Lógica y grafico juntos
             int x = posX;
             int y = posY;
@@ -199,7 +206,7 @@ public class trianguloPascal {
         }
 
         public ArrayList<Integer> sumasHorizontales() { //Lógica y grafico juntos
-            posX-=62;
+            posX -= 62;
             int auxX = posX + (size * 3);
             int auxY = posY - size;
             graficarTriangulo();
@@ -326,19 +333,115 @@ public class trianguloPascal {
         }
 
         public void fibonacci() {
-            int x = posX;
+            //Se genera la sucesion y se dibuja con sus colores 
+            int x = posX-=40;
             int y = posY;
-            for (int[] fila : filas) {
-                for (int i : fila) {
-                    sketch.fill(150); //Los cuadros salen grises
-                    sketch.rect(x += size, y, size, size);//PosX, PosY, Ancho, Alto
-                    sketch.fill(0); //El texto sale negro
-                    sketch.text(i, x + (size / 2) - 3, y + (size / 2) + 5);
-                }
+            generarColores();
+            ArrayList<Integer> fibonac = new ArrayList<Integer>(); //Acá se almacena la sucesión
+            for (int i = 0; i < filas.size(); i++) {
+                int[] colorActual = colores.get(i);
+                int[] filaActual = filas.get(i);
+                fibonac.add(dibujarArriba(i, 0, colorActual, x, y));
                 y += size;
                 x = posX -= size / 2;
             }
+            int[] ultima = filas.get(filas.size() - 1);
+            for (int i = 1; i < ultima.length; i++) {
+                rellenar(filas.size() - 1, i, 150, x + size + (size / 2), y - size);
+                x += size;
+            }
+
+            restaurarPosiciones();
+
+            //Se dibujan los cuadros con los valores de la sucesión
+            x = posX*2+60;
+            y = posY-size;
+            for (int i = 0; i < filas.size(); i++) { //Recorre todas las filas
+                int[] colorActual = colores.get(i);
+                sketch.fill(colorActual[0], colorActual[1], colorActual[2]); //El texto sale negro
+                sketch.rect(x, y += size, size, size);
+                //Dibuja un cuadro para cada fila
+
+                sketch.fill(0);
+                int[] actual = filas.get(i); //Fila actual
+                int valor = fibonac.get(i);
+                if (valor < 9) { //Pone los textos
+                    sketch.text(valor, x + (size / 2), y + (size / 2) + 5);
+                } else if (valor < 99) {
+                    sketch.text(valor, x + (size / 2) - 6, y + (size / 2) + 5);
+                }//Son dos para que queden centrados los mayores a 10
+            }
+
+            restaurarPosiciones();
+            //System.out.print(fibonac); Imprime la sucesión de fibonacci
         }
+
+        public void rellenar(int fila, int pos, int col, int x, int y) {
+            sketch.fill(col); //Los cuadros salen grises
+            sketch.rect(x += size, y, size, size);//PosX, PosY, Ancho, Alto
+            sketch.fill(0); //El texto sale negro
+            sketch.text(filas.get(fila)[pos], x + (size / 2) - 3, y + (size / 2) + 5);
+            while (existeArriba(fila, pos)) {
+                sketch.fill(col); //Los cuadros salen grises
+                sketch.rect(x += size + (size / 2), y -= size, size, size);//PosX, PosY, Ancho, Alto
+                sketch.fill(0); //El texto sale negro
+                sketch.text(filas.get(fila - 1)[pos + 1], x + (size / 2) - 3, y + (size / 2) + 5);
+                fila--;
+                pos++;
+            }
+        }
+
+        public int dibujarArriba(int fila, int pos, int[] col, int x, int y) {
+            int aux = fila;
+            int posAux = pos;
+            int numFib = 0;
+            sketch.fill(col[0], col[1], col[2]); //Los cuadros salen de color
+            sketch.rect(x += size, y, size, size);//PosX, PosY, Ancho, Alto
+            sketch.fill(0); //El texto sale negro
+            int numero = filas.get(fila)[0];
+            sketch.text(numero, x + (size / 2) - 3, y + (size / 2) + 5);
+            numFib += numero;
+            while (existeArriba(fila, pos)) {
+                sketch.fill(col[0], col[1], col[2]); //Los cuadros salen de color
+                sketch.rect(x += size + (size / 2), y -= size, size, size);//PosX, PosY, Ancho, Alto
+                sketch.fill(0); //El texto sale negro
+                numero = filas.get(aux -= 1)[posAux += 1];
+                sketch.text(numero, x + (size / 2) - 3, y + (size / 2) + 5);
+                numFib += numero;
+                fila--;
+                pos++;
+            }
+            return numFib;
+        }
+
+        public boolean existeArriba(int fila, int posicion) {
+            if (fila == 0 && fila == 1) {
+                return false;
+            } else if (fila > 1) {
+                int[] filaAnterior = filas.get(fila - 1);
+                if (filaAnterior.length - 1 > posicion) {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+        
+        public void generarColores(){
+        int[] num = {150,95,110,125,200,155,170,180,190,140,210,220,230,240};
+        for(int i = 0; i < 10; i++){
+            if(i == 0 || i == 3 || i == 6 || i == 9){
+                int[] c = {num[i],num[i/2],num[i+3]};
+                colores.add(c);
+            } else if(i == 1 || i == 4 || i == 7 || i == 10){
+                int[] c = {num[i/2],num[i+3],num[i]}; 
+                colores.add(c);
+            } else {
+                int[] c = {num[i+3],num[i],num[i/2]}; 
+                colores.add(c);
+            }
+        }
+    }
 
         @Override
         public String toString() {

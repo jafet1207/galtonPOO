@@ -9,13 +9,16 @@ import Excepciones.miExcepcion;
 import classesPS.galton;
 import classesPS.trianguloPascal;
 import javax.swing.JOptionPane;
-import processing.core.PApplet;
 
 /**
  *
- * @author 
+ * @author
  */
 public class menuWindow extends javax.swing.JFrame {
+
+    int opc = 0;
+    int altura = 0;
+    int diagonal = 0;
 
     /**
      * Creates new form MenuWindow
@@ -23,6 +26,8 @@ public class menuWindow extends javax.swing.JFrame {
     public menuWindow() {
         initComponents();
         this.setLocationRelativeTo(null);
+        btnIniciar.setVisible(false);
+
     }
 
     /**
@@ -47,7 +52,7 @@ public class menuWindow extends javax.swing.JFrame {
         cboSize = new javax.swing.JComboBox<>();
         lblAltura = new javax.swing.JLabel();
         lblText = new javax.swing.JLabel();
-        jButtonIniciar = new javax.swing.JButton();
+        btnIniciar = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -169,11 +174,16 @@ public class menuWindow extends javax.swing.JFrame {
         lblText.setForeground(new java.awt.Color(255, 255, 255));
         getContentPane().add(lblText, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 570, 420));
 
-        jButtonIniciar.setBackground(new java.awt.Color(0, 0, 0));
-        jButtonIniciar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
-        jButtonIniciar.setText("Iniciar");
-        getContentPane().add(jButtonIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 520, 260, 80));
+        btnIniciar.setBackground(new java.awt.Color(0, 0, 0));
+        btnIniciar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        btnIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        btnIniciar.setText("Iniciar");
+        btnIniciar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 530, 260, 80));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.jpg"))); // NOI18N
         getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1019, 675));
@@ -191,7 +201,7 @@ public class menuWindow extends javax.swing.JFrame {
                 + "Sucesión de Fibonacci\n"
                 + "Aparato de Galton\n"
                 + "Al seleccionar un botón se muestra una pequeña descripción de la funcionalidad y se habilita el botón de inicio"
-            );
+        );
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -201,13 +211,13 @@ public class menuWindow extends javax.swing.JFrame {
     private void btnGaltonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaltonActionPerformed
         // TODO add your handling code here:
         lblText.setText("<html>A continuación se muestra el Aparato de Galton: <br>	"
-                + "Esta asombrosa máquina (aparato de Galton1o quincunce), fue creada por Sir Francis Galton y\n" 
-                + "es un triángulo de Pascal hecho con palos. Con el aparato de Galton se pueden crear experiencias\n" 
-                + "aleatorias. Sobre un tablero inclinado se encuentran distribuidos regularmente un sistema de\n" 
-                + "clavos que permiten deslizar un gran número de bolas que proceden de un depósito superior.\n" 
-                + "Las bolas, al chocar con los clavos, se alejan más o menos de la línea central de la caída,\n" 
-                + "según la ley del azar.</html>"); 
-        galton gtn = new galton(Integer.parseInt(cboSize.getSelectedItem().toString()));
+                + "Esta asombrosa máquina (aparato de Galton1o quincunce), fue creada por Sir Francis Galton y\n"
+                + "es un triángulo de Pascal hecho con palos. Con el aparato de Galton se pueden crear experiencias\n"
+                + "aleatorias. Sobre un tablero inclinado se encuentran distribuidos regularmente un sistema de\n"
+                + "clavos que permiten deslizar un gran número de bolas que proceden de un depósito superior.\n"
+                + "Las bolas, al chocar con los clavos, se alejan más o menos de la línea central de la caída,\n"
+                + "según la ley del azar.</html>");
+        btnIniciar.setVisible(true); opc = 7;
     }//GEN-LAST:event_btnGaltonActionPerformed
 
     private void btnPascalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPascalActionPerformed
@@ -215,47 +225,41 @@ public class menuWindow extends javax.swing.JFrame {
                 + "Este es un triángulo de números enteros, infinito y simétrico.<br>"
                 + "Se empieza con un 1 en la primera fila, y en las filas siguientes se van colocando "
                 + "números de forma que cada uno de ellos sea la suma de los dos números que tiene encima.");
-        trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
+        btnIniciar.setVisible(true); opc = 1;
     }//GEN-LAST:event_btnPascalActionPerformed
 
     private void btnDiagonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagonalesActionPerformed
-        int altura = Integer.parseInt(cboSize.getSelectedItem().toString());
-        int diagonal = Integer.parseInt(cboDiags.getSelectedItem().toString());
         lblText.setText("<html>A continuación se muestra las diagonales:<br>	"
                 + "     *La primera diagonal muestra solo unos(1).<br>"
                 + "	*La segunda diagonal muestra todos los números consecutivos(1,2,3...).<br>"
                 + "	*La tercera diagonal muestra los números triangulares.<br>"
                 + "	*La cuarta diagonal muestra los números tetraédricos.</html>");
-        if(altura < diagonal){
-            JOptionPane.showMessageDialog(null, new miExcepcion(1).getMessage());
-        } else {
-            trianguloPascal tp = new trianguloPascal(2, altura, diagonal); // 2 == Diagonales
-        }
+        btnIniciar.setVisible(true); opc = 2;
     }//GEN-LAST:event_btnDiagonalesActionPerformed
 
     private void btnSierpinskiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSierpinskiActionPerformed
         // TODO add your handling code here:
         lblText.setText("<html>A continuación se muestra los pares e impares<br>	"
-                + "Se muestran los números impares y los pares en diferente color de modo\n" 
-                + "que se obtiene un patrón igual al del Triángulo de Sierpienski. <br>Este triángulo en específico\n" 
-                + "se construye dividiendo el mismo triángulo a la mitad, y diferencia cada una de las tres\n" 
+                + "Se muestran los números impares y los pares en diferente color de modo\n"
+                + "que se obtiene un patrón igual al del Triángulo de Sierpienski. <br>Este triángulo en específico\n"
+                + "se construye dividiendo el mismo triángulo a la mitad, y diferencia cada una de las tres\n"
                 + "esquinas; esto se debe de repetir con todos los triángulos más pequeños.</html>");
-        trianguloPascal tp = new trianguloPascal(3, Integer.parseInt(cboSize.getSelectedItem().toString())); // 3 == Sierpinski
+        btnIniciar.setVisible(true); opc = 3;
     }//GEN-LAST:event_btnSierpinskiActionPerformed
 
     private void btnSumasHorizontalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumasHorizontalesActionPerformed
         // TODO add your handling code here:
         lblText.setText("<html>A continuación se muestra la suma horizontal: <br>	"
                 + "Se obtienen las potencias de 2</html>");
-        //trianguloPascal tp = new trianguloPascal(4, Integer.parseInt(cboSize.getSelectedItem().toString())); // 4 == Sumas
+        btnIniciar.setVisible(true); opc = 4;
     }//GEN-LAST:event_btnSumasHorizontalesActionPerformed
 
     private void btnSimetríaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimetríaActionPerformed
         // TODO add your handling code here:
         lblText.setText("<html>A continuación se muestra la simetría: <br>	"
-                + "El triángulo es simétrico, esto quiere decir que se ve igual desde la derecha que desde " 
+                + "El triángulo es simétrico, esto quiere decir que se ve igual desde la derecha que desde "
                 + "la izquierda, es decir, una mitad es la imagen en un espejo de la otra mitad.</html>");
-        //trianguloPascal tp = new trianguloPascal(5, Integer.parseInt(cboSize.getSelectedItem().toString())); // 5 == Simetría
+        btnIniciar.setVisible(true); opc = 5;
     }//GEN-LAST:event_btnSimetríaActionPerformed
 
     private void btnFibonacciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFibonacciActionPerformed
@@ -265,14 +269,43 @@ public class menuWindow extends javax.swing.JFrame {
                 + "fn = fn - 1 + fn - 2<br>"
                 + "Partiendo de dos primeros valores predeterminados:<br>"
                 + "f0 = 1<br>"
-                + "f1 = 1.</html>"); 
+                + "f1 = 1.</html>");
+        btnIniciar.setVisible(true); opc = 6;
     }//GEN-LAST:event_btnFibonacciActionPerformed
+
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        // TODO add your handling code here:
+        if (opc == 1) {
+            trianguloPascal tp = new trianguloPascal(opc, Integer.parseInt(cboSize.getSelectedItem().toString()));
+        } else if (opc == 2) {
+            int altura = Integer.parseInt(cboSize.getSelectedItem().toString());
+            int diagonal = Integer.parseInt(cboDiags.getSelectedItem().toString());
+            if (altura < diagonal) {
+                JOptionPane.showMessageDialog(null, new miExcepcion(1).getMessage());
+            } else {
+                trianguloPascal tp = new trianguloPascal(2, altura, diagonal); // 2 == Diagonales
+            }
+        } else if (opc == 3){
+            trianguloPascal tp = new trianguloPascal(3, Integer.parseInt(cboSize.getSelectedItem().toString())); // 3 == Sierpinski
+        } else if (opc == 4){
+            trianguloPascal tp = new trianguloPascal(4, Integer.parseInt(cboSize.getSelectedItem().toString())); // 4 == Sumas
+        } else if (opc == 5){
+             trianguloPascal tp = new trianguloPascal(5, Integer.parseInt(cboSize.getSelectedItem().toString())); // 5 == Simetría
+        } else if (opc == 6){
+            trianguloPascal tp = new trianguloPascal(6, Integer.parseInt(cboSize.getSelectedItem().toString())); // 6 == Fibonacci
+        } else if (opc == 7){
+            galton gtn = new galton(Integer.parseInt(cboSize.getSelectedItem().toString()));
+        }
+        
+        
+    }//GEN-LAST:event_btnIniciarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDiagonales;
     private javax.swing.JButton btnFibonacci;
     private javax.swing.JButton btnGalton;
     private javax.swing.JButton btnInfo;
+    private javax.swing.JButton btnIniciar;
     private javax.swing.JButton btnPascal;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnSierpinski;
@@ -280,7 +313,6 @@ public class menuWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnSumasHorizontales;
     private javax.swing.JComboBox<String> cboDiags;
     private javax.swing.JComboBox<String> cboSize;
-    private javax.swing.JButton jButtonIniciar;
     private javax.swing.JLabel lblAltura;
     private javax.swing.JLabel lblFondo;
     private javax.swing.JLabel lblText;
