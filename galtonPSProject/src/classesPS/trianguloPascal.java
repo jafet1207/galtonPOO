@@ -143,7 +143,7 @@ public class trianguloPascal {
             for (int[] fila : filas) {
                 int[] aux = new int[cont];
                 int contAux = 0;
-                for (int i : fila) {
+                for (int i : fila) { //Todas las filas
                     if (contAux == diag - 1) {
                         sketch.fill(colorAux[0], colorAux[1], colorAux[2]);
                         aux[contAux] = i * -1;

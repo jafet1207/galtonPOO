@@ -5,8 +5,8 @@
  */
 package UI;
 
+import Excepciones.miExcepcion;
 import classesPS.galton;
-import classesPS.pascal;
 import classesPS.trianguloPascal;
 import javax.swing.JOptionPane;
 import processing.core.PApplet;
@@ -45,8 +45,10 @@ public class menuWindow extends javax.swing.JFrame {
         btnGalton = new javax.swing.JButton();
         cboDiags = new javax.swing.JComboBox<>();
         cboSize = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        jLabelFondo = new javax.swing.JLabel();
+        lblAltura = new javax.swing.JLabel();
+        lblText = new javax.swing.JLabel();
+        jButtonIniciar = new javax.swing.JButton();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -133,6 +135,11 @@ public class menuWindow extends javax.swing.JFrame {
         btnFibonacci.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnFibonacci.setForeground(new java.awt.Color(255, 255, 255));
         btnFibonacci.setText("Fibonacci");
+        btnFibonacci.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFibonacciActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnFibonacci, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 340, -1, -1));
 
         btnGalton.setBackground(new java.awt.Color(0, 0, 0));
@@ -154,12 +161,22 @@ public class menuWindow extends javax.swing.JFrame {
         cboSize.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10" }));
         getContentPane().add(cboSize, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 50, 30));
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel1.setText("ALTURA");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
+        lblAltura.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblAltura.setText("ALTURA");
+        getContentPane().add(lblAltura, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, -1, -1));
 
-        jLabelFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.jpg"))); // NOI18N
-        getContentPane().add(jLabelFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1019, 675));
+        lblText.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lblText.setForeground(new java.awt.Color(255, 255, 255));
+        getContentPane().add(lblText, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 60, 570, 420));
+
+        jButtonIniciar.setBackground(new java.awt.Color(0, 0, 0));
+        jButtonIniciar.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jButtonIniciar.setForeground(new java.awt.Color(255, 255, 255));
+        jButtonIniciar.setText("Iniciar");
+        getContentPane().add(jButtonIniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 520, 260, 80));
+
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Fondo.jpg"))); // NOI18N
+        getContentPane().add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1019, 675));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -172,7 +189,9 @@ public class menuWindow extends javax.swing.JFrame {
                 + "Suma horizontal\n"
                 + "Simetría\n"
                 + "Sucesión de Fibonacci\n"
-                + "Aparato de Galton\n");
+                + "Aparato de Galton\n"
+                + "Al seleccionar un botón se muestra una pequeña descripción de la funcionalidad y se habilita el botón de inicio"
+            );
     }//GEN-LAST:event_btnInfoActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -181,18 +200,34 @@ public class menuWindow extends javax.swing.JFrame {
 
     private void btnGaltonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGaltonActionPerformed
         // TODO add your handling code here:
+        lblText.setText("<html>A continuación se muestra el Aparato de Galton: <br>	"
+                + "Esta asombrosa máquina (aparato de Galton1o quincunce), fue creada por Sir Francis Galton y\n" 
+                + "es un triángulo de Pascal hecho con palos. Con el aparato de Galton se pueden crear experiencias\n" 
+                + "aleatorias. Sobre un tablero inclinado se encuentran distribuidos regularmente un sistema de\n" 
+                + "clavos que permiten deslizar un gran número de bolas que proceden de un depósito superior.\n" 
+                + "Las bolas, al chocar con los clavos, se alejan más o menos de la línea central de la caída,\n" 
+                + "según la ley del azar.</html>"); 
         galton gtn = new galton(Integer.parseInt(cboSize.getSelectedItem().toString()));
     }//GEN-LAST:event_btnGaltonActionPerformed
 
     private void btnPascalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPascalActionPerformed
-         trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
+        lblText.setText("<html>A continuación se muestra el triángulo de Pascal:<br>"
+                + "Este es un triángulo de números enteros, infinito y simétrico.<br>"
+                + "Se empieza con un 1 en la primera fila, y en las filas siguientes se van colocando "
+                + "números de forma que cada uno de ellos sea la suma de los dos números que tiene encima.");
+        trianguloPascal tp = new trianguloPascal(1, Integer.parseInt(cboSize.getSelectedItem().toString())); // 1 == Pascal
     }//GEN-LAST:event_btnPascalActionPerformed
 
     private void btnDiagonalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDiagonalesActionPerformed
         int altura = Integer.parseInt(cboSize.getSelectedItem().toString());
         int diagonal = Integer.parseInt(cboDiags.getSelectedItem().toString());
+        lblText.setText("<html>A continuación se muestra las diagonales:<br>	"
+                + "     *La primera diagonal muestra solo unos(1).<br>"
+                + "	*La segunda diagonal muestra todos los números consecutivos(1,2,3...).<br>"
+                + "	*La tercera diagonal muestra los números triangulares.<br>"
+                + "	*La cuarta diagonal muestra los números tetraédricos.</html>");
         if(altura < diagonal){
-            JOptionPane.showMessageDialog(null, "La altura debe ser mayor o igual a la diagonal");
+            JOptionPane.showMessageDialog(null, new miExcepcion(1).getMessage());
         } else {
             trianguloPascal tp = new trianguloPascal(2, altura, diagonal); // 2 == Diagonales
         }
@@ -200,18 +235,38 @@ public class menuWindow extends javax.swing.JFrame {
 
     private void btnSierpinskiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSierpinskiActionPerformed
         // TODO add your handling code here:
+        lblText.setText("<html>A continuación se muestra los pares e impares<br>	"
+                + "Se muestran los números impares y los pares en diferente color de modo\n" 
+                + "que se obtiene un patrón igual al del Triángulo de Sierpienski. <br>Este triángulo en específico\n" 
+                + "se construye dividiendo el mismo triángulo a la mitad, y diferencia cada una de las tres\n" 
+                + "esquinas; esto se debe de repetir con todos los triángulos más pequeños.</html>");
         trianguloPascal tp = new trianguloPascal(3, Integer.parseInt(cboSize.getSelectedItem().toString())); // 3 == Sierpinski
     }//GEN-LAST:event_btnSierpinskiActionPerformed
 
     private void btnSumasHorizontalesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSumasHorizontalesActionPerformed
         // TODO add your handling code here:
-        trianguloPascal tp = new trianguloPascal(4, Integer.parseInt(cboSize.getSelectedItem().toString())); // 4 == Sumas
+        lblText.setText("<html>A continuación se muestra la suma horizontal: <br>	"
+                + "Se obtienen las potencias de 2</html>");
+        //trianguloPascal tp = new trianguloPascal(4, Integer.parseInt(cboSize.getSelectedItem().toString())); // 4 == Sumas
     }//GEN-LAST:event_btnSumasHorizontalesActionPerformed
 
     private void btnSimetríaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimetríaActionPerformed
         // TODO add your handling code here:
-        trianguloPascal tp = new trianguloPascal(5, Integer.parseInt(cboSize.getSelectedItem().toString())); // 5 == Simetría
+        lblText.setText("<html>A continuación se muestra la simetría: <br>	"
+                + "El triángulo es simétrico, esto quiere decir que se ve igual desde la derecha que desde " 
+                + "la izquierda, es decir, una mitad es la imagen en un espejo de la otra mitad.</html>");
+        //trianguloPascal tp = new trianguloPascal(5, Integer.parseInt(cboSize.getSelectedItem().toString())); // 5 == Simetría
     }//GEN-LAST:event_btnSimetríaActionPerformed
+
+    private void btnFibonacciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFibonacciActionPerformed
+        // TODO add your handling code here:
+        lblText.setText("<html>A continuación se muestra la sucesión de Fibonacci: <br>	"
+                + "La sucesión de Fibonacci se obtiene aplicando la fórmula:<br>"
+                + "fn = fn - 1 + fn - 2<br>"
+                + "Partiendo de dos primeros valores predeterminados:<br>"
+                + "f0 = 1<br>"
+                + "f1 = 1.</html>"); 
+    }//GEN-LAST:event_btnFibonacciActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDiagonales;
@@ -225,7 +280,9 @@ public class menuWindow extends javax.swing.JFrame {
     private javax.swing.JButton btnSumasHorizontales;
     private javax.swing.JComboBox<String> cboDiags;
     private javax.swing.JComboBox<String> cboSize;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabelFondo;
+    private javax.swing.JButton jButtonIniciar;
+    private javax.swing.JLabel lblAltura;
+    private javax.swing.JLabel lblFondo;
+    private javax.swing.JLabel lblText;
     // End of variables declaration//GEN-END:variables
 }
