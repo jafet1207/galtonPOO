@@ -15,8 +15,10 @@ import shiffman.box2d.Box2DProcessing;
 import processing.core.*;
 
 /**
- *
- * @author 
+ * Clase encargada de mostrar el clavo y su interacción con otros cuerpos
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class clavo extends figura{
 
@@ -29,6 +31,11 @@ public class clavo extends figura{
         color[0] = 255;
     }
 
+     /**
+     * Genera un cuerpo en Box2D para que pueda interactuar con otros cuerpos
+     * @param x Es la ubicación en el eje X donde se creará el cuerpo
+     * @param y Es la ubicación en el eje Y donde se creará el cuerpo
+     */
     @Override
     public void makeBody(float x, float y) {
         //r = 3;
@@ -55,6 +62,9 @@ public class clavo extends figura{
 
     }
 
+    /**
+     * Función encargada de generar el dibujo en la ventana de processing
+     */
     @Override
     public void display() {
         // We need the Body’s location and angle

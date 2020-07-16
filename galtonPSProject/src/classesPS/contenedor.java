@@ -13,8 +13,10 @@ import shiffman.box2d.Box2DProcessing;
 import static processing.core.PConstants.CENTER;
 import processing.core.*;
 /**
- *
- * @author 
+ * Clase encargada de generar una barra sólida dentro de la ventana
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class contenedor {
     
@@ -55,7 +57,9 @@ public class contenedor {
         b.createFixture(sd, 1);
     }
 
-    // Draw the boundary, if it were at an angle we'd have to do something fancier
+    /**
+     * Función encargada de mostrar el contenedor en la ventana de processing
+     */
     void display() {
         sketch.noFill();
         sketch.stroke(0);
