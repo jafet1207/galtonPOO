@@ -8,8 +8,10 @@ package UI;
 import java.awt.Image;
 import java.awt.Toolkit;
 /**
- *
- * @author 
+ * Ventana principal donde se muestra el nombre de los autores y un boton para iniciar y salir
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class mainWindow extends javax.swing.JFrame {
 

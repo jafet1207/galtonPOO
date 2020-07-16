@@ -6,8 +6,10 @@
 package Excepciones;
 
 /**
- *
- * @author XPC
+ * Esta clase sirve para tirar excepciones personalizadas
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class miExcepcion extends Exception{
     

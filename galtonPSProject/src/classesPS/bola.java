@@ -16,8 +16,10 @@ import shiffman.box2d.Box2DProcessing;
 import processing.core.*;
 
 /**
- *
- * @author
+ * Clase encargada de mostrar la bola y su interacción con otros cuerpos
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class bola extends figura{
     
@@ -35,6 +37,11 @@ public class bola extends figura{
         color=c;
     }
     
+    /**
+     * Genera un cuerpo en Box2D para que pueda interactuar con otros cuerpos
+     * @param x Es la ubicación en el eje X donde se creará el cuerpo
+     * @param y Es la ubicación en el eje Y donde se creará el cuerpo
+     */
     @Override
     public void makeBody(float x, float y) {
 
@@ -57,7 +64,10 @@ public class bola extends figura{
         body.createFixture(fd);
 
     }
-
+    
+    /**
+     * Función encargada de generar el dibujo en la ventana de processing
+     */
     @Override
     public void display() {
         // We need the Body’s location and angle
@@ -73,7 +83,10 @@ public class bola extends figura{
         sketch.ellipse(0, 0, radio * 2, radio * 2);
         sketch.popMatrix();
     }
-
+    
+    /**
+     * Se encarga de cambiar el color de la bola
+     */
     void cambioColor() {
         
         c[0] = (float) (Math.random()*255)+100;

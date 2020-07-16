@@ -10,8 +10,10 @@ import processing.core.PApplet;
 import shiffman.box2d.Box2DProcessing;
 
 /**
- *
- * @author 
+ * Clase abstracta para generar una figura en la ventana de processing
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public abstract class figura {
     
@@ -63,8 +65,15 @@ public abstract class figura {
     public void setColor(float[] color) {
         this.color = color;
     }
-    
+    /**
+     * Función abstracta que debe generar un cuerpo en Box2D para que pueda interactuar con otros cuerpos
+     * @param x Es la ubicación en el eje X donde se creará el cuerpo
+     * @param y Es la ubicación en el eje Y donde se creará el cuerpo
+     */
     public abstract void makeBody(float x, float y);
+    /**
+     * Función abstracta encargada de generar el dibujo en la ventana de processing
+     */
     public abstract void display();
 
     @Override

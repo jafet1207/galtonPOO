@@ -9,8 +9,10 @@ import static processing.core.PApplet.radians;
 import org.jbox2d.dynamics.contacts.*;
 
 /**
- *
- * @author
+ * Clase que se encarga de crear y grafica el aparato de Galton y sus funcionalidades
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class galton extends PApplet {
 
@@ -22,6 +24,9 @@ public class galton extends PApplet {
         PApplet.main(classesPS.galton.processingWindow.class.getName());
     }
 
+    /**
+     * Clase interna que genera la ventana de processing
+     */
     public static class processingWindow extends PApplet {
 
         ArrayList<clavo> clavos;
@@ -32,10 +37,16 @@ public class galton extends PApplet {
         Box2DProcessing box2d;
         float[] color = {0, 0, 0};
 
+        /**
+         * Acá se configura el tamaño de la ventana
+         */
         public void settings() {
             size(800, 800);
         }
 
+        /**
+         * Acá van las configuraciones predeterminadas de programa antes de iniciar el bucle
+         */
         public void setup() {
 
             box2d = new Box2DProcessing(this);
@@ -93,11 +104,15 @@ public class galton extends PApplet {
             }
 
         }
-
+        /**
+         * Cierra la ventana sin cerrar todo el proyecto
+         */
         public void exit() {
             super.stop();
         }
-
+        /**
+         * Bucle infinito donde se ejecuta el aparato de Galton
+         */
         @Override
         public void draw() {
             background(230);
@@ -117,6 +132,10 @@ public class galton extends PApplet {
             }
         }
 
+        /**
+         * 
+         * @param cp 
+         */
         public void beginContact(Contact cp) {
             // Get both fixtures
 

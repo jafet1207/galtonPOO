@@ -11,8 +11,10 @@ import classesPS.trianguloPascal;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author
+ * Ventana donde se muestran todas las funcionalidades de Pascal y Galton
+ * @author Priscilla Chacón
+ * @author Álvaro Moreira
+ * @author Jafet Valverde
  */
 public class menuWindow extends javax.swing.JFrame {
 
